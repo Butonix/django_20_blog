@@ -5,8 +5,13 @@ from django.urls import reverse
 # Create your models here.
 
 
+def upload_location(instance, filename):
+    return '%s/%s' %(instance.id, filename)
+
 class Post(models.Model):
     title = models.CharField(max_length=120)
+    image = models.FileField(blank=True,null=True,
+                             upload_to=upload_location,)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
