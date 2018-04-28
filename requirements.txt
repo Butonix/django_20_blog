@@ -1,4 +1,8 @@
 Django==2.0
 django-crispy-forms==1.7.2
 django-registration-redux==2.2
+Pillow==5.1.0
+pytils==0.3
 pytz==2018.3
+regex==2018.2.21
+Unidecode==0.4.21

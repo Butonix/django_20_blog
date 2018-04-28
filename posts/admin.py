@@ -11,6 +11,7 @@ class PostModelAdmin(admin.ModelAdmin):
 
     list_display_links = ['id']
     list_editable = ['title']
+    prepopulated_fields = {"slug": ("title",)}
 
     class Meta:
         model = Post
