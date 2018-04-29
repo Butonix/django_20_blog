@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.urls import reverse
 from django.db.models.signals import pre_save
 from pytils.translit import slugify
@@ -11,6 +12,7 @@ def upload_location(instance, filename):
     return '%s/%s' %(instance.slug, filename)
 
 class Post(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     title = models.CharField(max_length=120)
     image = models.FileField(blank=True,null=True,
                              upload_to=upload_location,)
