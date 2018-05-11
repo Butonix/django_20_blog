@@ -26,7 +26,7 @@ def post_list(request):
             Q(user__last_name__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(queryset_list, 5)
+    paginator = Paginator(queryset_list, 10)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:

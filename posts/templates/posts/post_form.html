@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}{{ block.super }} | {{ instance.title }}{% endblock %}
-
+{% block head_extra %} {{ form.media }}{% endblock head_extra %}
 {% block content %}
     <div class="col-6 ml-auto mr-auto">
 
@@ -12,7 +12,7 @@
         {% csrf_token %}
         {{ form|crispy }}
 
-        <input type="submit" class="btn btn-primary" value="Sign Up">
+        <input type="submit" class="btn btn-primary" value="Create">
     </form>
 
     <a href='{% url "posts:post_list" %}'>Home</a>

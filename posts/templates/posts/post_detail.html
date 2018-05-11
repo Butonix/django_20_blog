@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load urlify %}
 
+
 {% block title %}{{ block.super }} | {{ instance.title }}{% endblock %}
+
 {% block content %}
     <p class="col-6 ml-auto mr-auto">
 
@@ -17,7 +19,7 @@
     {{ instance.content|urlify|truncatechars:30 }}<br>
     {{ share_string|truncatechars:20 }}
 
-    {{ instance.content|linebreaks }}<br/><br/>
+    <div class="content-markdown">{{ instance.content}}</div><br/><br/>
 
     <hr>
 
