@@ -19,7 +19,7 @@
     {{ instance.content|urlify|truncatechars:30 }}<br>
     {{ share_string|truncatechars:20 }}
 
-    <div class="content-markdown">{{ instance.content}}</div><br/><br/>
+    <div class="post-detail-item">{{ instance.get_markdown}}</div><br/><br/>
 
     <hr>
 

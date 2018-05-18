@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my_apps
     'posts',
+
     #third_party_apps
     'crispy_forms',
     'pagedown',
+    'markdown_deux',
 ]
 
 MIDDLEWARE = [

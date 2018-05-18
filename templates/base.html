@@ -73,10 +73,38 @@
                 console.log(markedContent)
                 $(this).html(markedContent)
             })
-            $(".content-markdown img").each(function () {
+            $(".post-detail-item img").each(function () {
                 $(this).addClass('img-fluid')
             })
 
+
+            var contentInput = $('#id_content');
+
+            function setContent(value) {
+                var markedContent = marked(value)
+                $('#priview-content').html(markedContent)
+                $("#priview-content img").each(function () {
+                    $(this).addClass('img-fluid')
+                })
+            }
+            setContent(contentInput.val())
+
+            contentInput.keyup(function () {
+                var newContent = $(this).val()
+                setContent(newContent)
+            })
+
+            var titleInput = $('#id_title');
+
+            function setTitle(value) {
+                $('#priview-title').text(value)
+            }
+            setTitle(titleInput.val())
+
+            titleInput.keyup(function () {
+                var newContent = $(this).val()
+                setTitle(newContent)
+            })
         })
     </script>
 

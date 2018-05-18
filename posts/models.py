@@ -3,7 +3,11 @@ from django.conf import settings
 from django.urls import reverse
 from django.db.models.signals import pre_save
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+
 from pytils.translit import slugify
+
+from markdown_deux import markdown
 
 
 # Create your models here.
@@ -36,6 +40,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         # return '%s' % (self.id)
         return reverse('posts:post_detail', kwargs={"slug": self.slug})
+
+    def get_markdown(self):
+        content = self.content
+        return mark_safe(markdown(content))
 
 
 def create_slug(instance, new_slug=None):
