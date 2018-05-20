@@ -4,28 +4,30 @@
 {% block title %}{{ block.super }} | {{ instance.title }}{% endblock %}
 {% block head_extra %} {{ form.media }}{% endblock head_extra %}
 {% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <h1>Preview</h1>
+                <div class="content-preview">
+                    <h3 id="priview-title"></h3>
+                    <p id="priview-content"></p>
+                </div>
+            </div>
+            <div class="col-md-5">
+            <div class="col-md-1"></div>
+            <h1>Form</h1>
+            <form method="POST" action="" enctype="multipart/form-data" class="">
+                {% csrf_token %}
+                {{ form|crispy }}
 
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Preview</h1>
-            <div class="content-preview">
-                <h3 id="priview-title"></h3>
-                <p id="priview-content"></p>
+                <input type="submit" class="btn btn-primary" value="Create">
+            </form>
+
+            <a href='{% url "posts:post_list" %}'>Home</a>
+
+        {#    <a href='{% url "posts:post_delete" id=instance.id%}'>Delete</a>#}
             </div>
         </div>
-        <div class="col-sm-6 ">
-        <h1>Form</h1>
-        <form method="POST" action="" enctype="multipart/form-data" class="">
-            {% csrf_token %}
-            {{ form|crispy }}
-
-            <input type="submit" class="btn btn-primary" value="Create">
-        </form>
-
-        <a href='{% url "posts:post_list" %}'>Home</a>
-
-    {#    <a href='{% url "posts:post_delete" id=instance.id%}'>Delete</a>#}
-        </div>
-
     </div>
 {%  endblock %}

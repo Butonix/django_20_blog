@@ -17,7 +17,10 @@ def post_list(request):
     queryset_list = Post.objects.active().order_by('-created')
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all().order_by('-created')
+    queryset_list_last_items = queryset_list.order_by('-created')[:3]
+
     query = request.GET.get('q')
+
     if query:
         queryset_list = queryset_list.filter(
             Q(title__icontains=query) |
@@ -26,7 +29,7 @@ def post_list(request):
             Q(user__last_name__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(queryset_list, 10)
+    paginator = Paginator(queryset_list, 5)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -37,7 +40,9 @@ def post_list(request):
     context = {
         'title': 'List',
         'object_list': queryset,
+        'object_list_3': queryset_list_last_items,
         'today': today,
+
     }
 
     return render(request, 'posts/post_list.html', context)

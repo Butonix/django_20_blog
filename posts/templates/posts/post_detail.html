@@ -5,37 +5,47 @@
 {% block title %}{{ block.super }} | {{ instance.title }}{% endblock %}
 
 {% block content %}
-    <p class="col-6 ml-auto mr-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 ml-auto mr-auto">
 
-    {% if instance.image %}
-        <img src="{{ instance.image.url }}" class="img-fluid">
-    {% endif %}
+            {% if instance.image %}
+                <img src="{{ instance.image.url }}" class="img-fluid">
+            {% endif %}
+            <div class="">
+            <h1 class="">{{ title }}</h1>
+            <div class="">
+                {% if instance.draft %} <span>Draft</span> {% endif %} <small class="date">{{ instance.publish }}</small>
+            {% if instance.user.get_full_name  %}
+                <p class="author">Author: {{ instance.user.get_full_name }}</p>
+            {% endif %}
 
-    <h1>{{ title }}{% if instance.draft %} Draft {% endif %} <small>{{ instance.publish }}</small></h1>
-    {% if instance.user.get_full_name  %}
-        <p>Author: {{ instance.user.get_full_name }}</p>
-    {% endif %}
+{#            {{ instance.content|urlify|truncatechars:30 }}<br>#}
+{#            {{ share_string|truncatechars:20 }}#}
+            </div>
+            </div>
 
-    {{ instance.content|urlify|truncatechars:30 }}<br>
-    {{ share_string|truncatechars:20 }}
+            <div class="post-detail-item">{{ instance.get_markdown}}</div><br/><br/>
 
-    <div class="post-detail-item">{{ instance.get_markdown}}</div><br/><br/>
+            <hr>
+            <a href='{% url "posts:post_list" %}'>Home</a>
 
-    <hr>
+            <a href='{% url "posts:post_update" slug=instance.slug%}'>Update</a>
 
-    <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true">
-    </div></p>
+            <a href='{% url "posts:post_delete" slug=instance.slug%}'>Delete</a>
+            <hr>
 
-    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5">
-    </div>
+            <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true">
+            </div></p>
 
-    <hr>
+            <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5">
+            </div>
 
-    <a href='{% url "posts:post_list" %}'>Home</a>
+            <hr>
 
-    <a href='{% url "posts:post_update" slug=instance.slug%}'>Update</a>
 
-    <a href='{% url "posts:post_delete" slug=instance.slug%}'>Delete</a>
+            </div>
+        </div>
     </div>
 
 {%  endblock %}

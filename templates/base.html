@@ -1,5 +1,4 @@
 {% load static %}
-
 <!doctype html>
 <html lang="en">
     <head>
@@ -8,24 +7,21 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="/favicon.ico">
-
         <title>{% block title %}Blog Django 2.0+{% endblock %}</title>
-
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic-ext" rel="stylesheet">
         <!--Fontawesome-->
         <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
         <!-- Bootstrap core CSS -->
-
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 {#        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">#}
-
         <!-- Custom styles for this template -->
+{#        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">#}
         <link href="{% static 'css/navbar-top.css' %}" rel="stylesheet">
         <link href="{% static 'css/main.css' %}" rel="stylesheet">
-
         {% block head_extra %}{% endblock head_extra %}
     </head>
-
-  <body>
+  <body class="home-template">
     <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -34,24 +30,10 @@
           js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.12';
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-
     {% include 'navbar.html' %}
-
     {% include 'posts/message_display.html' %}
-
-
-     {% block jumbotron %}
-
-     {% endblock jumbotron %}
-
-    <div class="container">
-        <div class="content">
             {% block content %}
-
             {% endblock %}
-        </div>
-    </div>
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -63,7 +45,6 @@
     {#    <script src="{% static 'js/jquery-3.2.1.slim.min.js'%}"></script>#}
     {#    <script src="{% static 'js/popper.min.js'%}"></script>#}
     {#    <script src="{% static 'js/bootstrap.min.js'%}"></script>#}
-
     <script type="text/javascript">
         $(document).ready(function () {
             $(".content-markdown").each(function () {
@@ -77,9 +58,7 @@
                 $(this).addClass('img-fluid')
             })
 
-
             var contentInput = $('#id_content');
-
             function setContent(value) {
                 var markedContent = marked(value)
                 $('#priview-content').html(markedContent)
@@ -88,25 +67,22 @@
                 })
             }
             setContent(contentInput.val())
-
             contentInput.keyup(function () {
                 var newContent = $(this).val()
                 setContent(newContent)
             })
 
             var titleInput = $('#id_title');
-
             function setTitle(value) {
                 $('#priview-title').text(value)
             }
             setTitle(titleInput.val())
-
             titleInput.keyup(function () {
                 var newContent = $(this).val()
                 setTitle(newContent)
             })
+
         })
     </script>
-
   </body>
 </html>
